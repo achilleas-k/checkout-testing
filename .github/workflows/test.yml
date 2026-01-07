@@ -8,7 +8,11 @@ jobs:
   test-stuff:
     runs-on: ubuntu-24.04
     steps:
-      - name: Where am I?
+      - name: Clone
+        env:
+          GITHUB_TOKEN: ${{ secrets.PUSHY_PUSH }}
         run: |
+          gh repo clone $GITHUB_REPOSITORY src/
+          cd src/
           git status
           git remote -v
