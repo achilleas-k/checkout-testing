@@ -1,0 +1,14 @@
+---
+name: "Test stuff"
+
+on:  # yamllint disable-line rule:truthy
+  workflow_dispatch:
+
+jobs:
+  test-stuff:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Where am I?
+        run: |
+          git status
+          git remote -v
