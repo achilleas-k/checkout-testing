@@ -33,5 +33,6 @@ jobs:
           git checkout -b "${branch}"
           git add .
           git commit -m "Adding new randfile"
-          git push -f origin "${branch}"
+          remote="https://oauth2:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}"
+          git push -f "${remote}" "HEAD:${branch}"
           gh pr create --base main --fill-first --head origin/"${branch}"
