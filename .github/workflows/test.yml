@@ -33,4 +33,5 @@ jobs:
           git checkout -b "${branch}"
           git add .
           git commit -m "Adding new randfile"
+          git push -f origin "${branch}"
           gh pr create --base main --fill-first --head origin/"${branch}"
