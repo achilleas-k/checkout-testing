@@ -12,7 +12,28 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.PUSHY_PUSH }}
         run: |
-          gh repo clone $GITHUB_REPOSITORY src/
-          cd src/
-          git status
-          git remote -v
+          gh repo clone $GITHUB_REPOSITORY ./src
+
+      - name: Config
+        working-directory: ./src
+        run: |
+          git config user.name "AK (bot)"
+          git config user.email "bot@achkts.xyz"
+
+      - name: Edit
+        working-directory: ./src
+        run: |
+          tmpfile=$(mktemp ./randfile-XXX)
+          echo "${RANDOM}" > tmpfile
+
+      - name: Commit to branch
+        working-directory: ./src
+        run: |
+          git checkout -b "new-file-$(date +%s)"
+          git add .
+          git commit -m "Adding new randfile"
+
+      - name: Create PR
+        working-directory: ./src
+        run: |
+          gh pr create --base main --fill-first
