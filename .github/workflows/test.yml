@@ -7,10 +7,10 @@ on:  # yamllint disable-line rule:truthy
 jobs:
   test-stuff:
     runs-on: ubuntu-24.04
+    env:
+      GH_TOKEN: ${{ secrets.PUSHY_PUSH }}
     steps:
       - name: Clone
-        env:
-          GITHUB_TOKEN: ${{ secrets.PUSHY_PUSH }}
         run: |
           gh repo clone $GITHUB_REPOSITORY ./src
 
