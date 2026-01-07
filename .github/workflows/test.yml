@@ -26,14 +26,11 @@ jobs:
           tmpfile=$(mktemp ./randfile-XXX)
           echo "${RANDOM}" > tmpfile
 
-      - name: Commit to branch
+      - name: Commit and open PR
         working-directory: ./src
         run: |
-          git checkout -b "new-file-$(date +%s)"
+          branch="new-file-$(date +%s)"
+          git checkout -b "${branch}"
           git add .
           git commit -m "Adding new randfile"
-
-      - name: Create PR
-        working-directory: ./src
-        run: |
-          gh pr create --base main --fill-first
+          gh pr create --base main --fill-first --head origin/"${branch}"
