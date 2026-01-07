@@ -35,4 +35,4 @@ jobs:
           git commit -m "Adding new randfile"
           remote="https://oauth2:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}"
           git push -f "${remote}" "HEAD:${branch}"
-          gh pr create --base main --fill-first --head origin/"${branch}"
+          gh pr create --base main --title "Add new randfile" --body "New file added" --head origin/"${branch}"
